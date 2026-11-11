@@ -216,34 +216,7 @@ textarea.big{width:100%;min-height:180px;font:12px var(--mono)}
 #mnav{display:none}
 .mtitle{display:none}
 @media (max-width:1180px){:root{--lw:150px;--rw:245px;--bh:160px}.titem .ar{display:none}}
-@media (max-width:899px){
-  :root{--code-fs:14px}
-  .titlebar,.menubar{display:none}
-  .mtitle{display:flex;align-items:center;gap:6px;padding:6px 8px;background:linear-gradient(#5d82c2,#3b5fa3);color:#fff;font-weight:600}
-  .mtitle .grow{flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-  .mtitle button{border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.15);color:#fff;border-radius:6px;padding:6px 10px;font-size:14px;min-height:36px}
-  .mtitle button.go{background:#2ea043;border-color:#2ea043;font-weight:700}
-  .mtitle button.st{background:#c62828;border-color:#c62828}
-  .mtitle button:disabled{opacity:.45}
-  .toolbar{display:none}
-  #main{display:block;position:relative;padding:0}
-  #main>.panel{position:absolute;inset:0;display:none;border:0}
-  body[data-mv=toolbox] #pToolbox,body[data-mv=design] #pDoc,body[data-mv=code] #pDoc,body[data-mv=props] #pRight,body[data-mv=errors] #pBottom{display:flex}
-  .doctabs{display:none}
-  .titem{padding:12px 14px;font-size:15px;border-bottom:1px solid #e3e8f2}
-  .titem .ar{display:inline}
-  .ticon{width:28px;height:24px}
-  #mnav{display:flex;background:#fff;border-top:1px solid #a9b8d3;padding-bottom:env(safe-area-inset-bottom)}
-  #mnav button{flex:1;border:0;background:none;padding:6px 2px 7px;font:11px var(--ui);color:#445;display:flex;flex-direction:column;align-items:center;gap:2px;position:relative}
-  #mnav button .i{font-size:19px;line-height:1}
-  #mnav button.act{color:#1f5fb4;font-weight:700;background:#eaf1fc}
-  #mnav .badge{position:absolute;top:2px;right:calc(50% - 22px);background:#d22;color:#fff;border-radius:9px;font-size:10px;padding:0 5px;min-width:16px}
-  .status{display:none}
-  #solx{display:none}
-  table.pg td{height:36px}table.pg input,table.pg select{height:36px;font-size:15px}table.pg td.pn{font-size:14px}
-  .h{width:16px;height:16px}
-  #gutter{width:36px}
-}
+@media (max-width:899px){body:not(.desk){--code-fs:14px}body:not(.desk) .titlebar,body:not(.desk) .menubar{display:none}body:not(.desk) .mtitle{display:flex;align-items:center;gap:6px;padding:6px 8px;background:linear-gradient(#5d82c2,#3b5fa3);color:#fff;font-weight:600}body:not(.desk) .mtitle .grow{flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}body:not(.desk) .mtitle button{border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.15);color:#fff;border-radius:6px;padding:6px 10px;font-size:14px;min-height:36px}body:not(.desk) .mtitle button.go{background:#2ea043;border-color:#2ea043;font-weight:700}body:not(.desk) .mtitle button.st{background:#c62828;border-color:#c62828}body:not(.desk) .mtitle button:disabled{opacity:.45}body:not(.desk) .toolbar{display:none}body:not(.desk) #main{display:block;position:relative;padding:0}body:not(.desk) #main>.panel{position:absolute;inset:0;display:none;border:0}body:not(.desk)[data-mv=toolbox] #pToolbox,body:not(.desk)[data-mv=design] #pDoc,body:not(.desk)[data-mv=code] #pDoc,body:not(.desk)[data-mv=props] #pRight,body:not(.desk)[data-mv=errors] #pBottom{display:flex}body:not(.desk) .doctabs{display:none}body:not(.desk) .titem{padding:12px 14px;font-size:15px;border-bottom:1px solid #e3e8f2}body:not(.desk) .titem .ar{display:inline}body:not(.desk) .ticon{width:28px;height:24px}body:not(.desk) #mnav{display:flex;background:#fff;border-top:1px solid #a9b8d3;padding-bottom:env(safe-area-inset-bottom)}body:not(.desk) #mnav button{flex:1;border:0;background:none;padding:6px 2px 7px;font:11px var(--ui);color:#445;display:flex;flex-direction:column;align-items:center;gap:2px;position:relative}body:not(.desk) #mnav button .i{font-size:19px;line-height:1}body:not(.desk) #mnav button.act{color:#1f5fb4;font-weight:700;background:#eaf1fc}body:not(.desk) #mnav .badge{position:absolute;top:2px;right:calc(50% - 22px);background:#d22;color:#fff;border-radius:9px;font-size:10px;padding:0 5px;min-width:16px}body:not(.desk) .status{display:none}body:not(.desk) #solx{display:none}body:not(.desk) table.pg td{height:36px}body:not(.desk) table.pg input,body:not(.desk) table.pg select{height:36px;font-size:15px}body:not(.desk) table.pg td.pn{font-size:14px}body:not(.desk) .h{width:16px;height:16px}body:not(.desk) #gutter{width:36px}}
 @media (pointer:coarse){.h{width:16px;height:16px}}
 
 #taskBox{direction:rtl;text-align:right;background:#fff8d6;border-bottom:1px solid #e5c365;padding:8px 12px;font-size:14px;line-height:1.7;white-space:pre-wrap;max-height:30%;overflow:auto;flex:none}
@@ -266,13 +239,18 @@ body.design-only .tb[data-a=mode]{background:#ffe8a6;border-color:#e5c365}
 body.design-only .sxbtns [data-a=addmodule]{display:none}
 
 #taskBox{cursor:pointer}#taskBox.mini{max-height:2.4em;overflow:hidden}#taskBox::after{content:'▲ إخفاء';float:left;font-size:11px;color:#8a6d00}#taskBox.mini::after{content:'▼ عرض المطلوب'}
-@media (max-width:899px){#taskBox{font-size:13px;max-height:38%}}
+@media (max-width:899px){body:not(.desk) #taskBox{font-size:13px;max-height:38%}}
 table.pg td.pn{color:#111!important;-webkit-text-fill-color:#111;opacity:1;visibility:visible}
 table.pg tr.on td.pn{color:#fff!important;-webkit-text-fill-color:#fff}
 table.pg input,table.pg select{color:#000;-webkit-text-fill-color:#000;opacity:1}
 .ptbtns button,.sxbtns button,.tb,.pbtn,.snips button,.exlist button,.imglib button{color:#000;-webkit-appearance:none;appearance:none}
 table.pg .cval select{opacity:0!important}
-@media (max-width:899px){#pRight>.ptitle:first-child{display:none}}
+@media (max-width:899px){body:not(.desk) #pRight>.ptitle:first-child{display:none}}
+
+body.desk #app{width:1100px;transform-origin:0 0;position:absolute;left:0;top:0}
+body.desk .mtitle{display:none!important}
+.tb[data-a=mobileview]{display:none}
+
 </style>
 </head>
 <body data-mv="design">
@@ -339,6 +317,7 @@ table.pg .cval select{opacity:0!important}
     <button class="tb" data-a="mode" title="إخفاء الكود والأحداث">🎨 خصائص فقط</button>
     <button class="tb" data-a="task" title="كتابة المطلوب من الطالبة">📋 المطلوب</button>
     <button class="tb" data-a="help">❓ مساعدة</button>
+    <button class="tb" data-a="mobileview">📱 عرض الهاتف</button>
   </div>
   <div id="main">
     <div class="panel" id="pToolbox">
@@ -2386,7 +2365,7 @@ function renderTask() {
   b.onclick = () => b.classList.toggle('mini');
 }
 let P; // project
-let sel = 'form', view = 'design', zoom = 1, compiled = null, running = null, propTab = 'props';
+let uiS = 1; let sel = 'form', view = 'design', zoom = 1, compiled = null, running = null, propTab = 'props';
 let codeFs = 15;
 function newFormFile(name) { return { name, kind: 'form', form: { text: name, w: 300, h: 300, backColor: 'Control', foreColor: 'ControlText', font: { name: 'Microsoft Sans Serif', size: 8.25, bold: false }, rtl: false }, ctls: [], code: `Public Class ${name}\n\nEnd Class\n` }; }
 function newModuleFile(name) { return { name, kind: 'module', ctls: [], code: `Module ${name}\n\nEnd Module\n` }; }
@@ -2458,7 +2437,7 @@ function toolDown(e) {
     document.removeEventListener('pointermove', mv); document.removeEventListener('pointerup', up);
     if (ghost) ghost.remove();
     const cl = $('#designZoom .wclient');
-    if (moved && cl) { const r = cl.getBoundingClientRect(); if (ev.clientX >= r.left && ev.clientX <= r.right && ev.clientY >= r.top && ev.clientY <= r.bottom) { addCtl(type, (ev.clientX - r.left) / zoom, (ev.clientY - r.top) / zoom); } return; }
+    if (moved && cl) { const r = cl.getBoundingClientRect(); if (ev.clientX >= r.left && ev.clientX <= r.right && ev.clientY >= r.top && ev.clientY <= r.bottom) { addCtl(type, (ev.clientX - r.left) / zoom / uiS, (ev.clientY - r.top) / zoom / uiS); } return; }
     if (!moved) {
       const n = F.ctls.filter(c => c.type !== 'timer').length; addCtl(type, 12 + (n % 6) * 14, 12 + (n % 8) * 28);
       if (isMobile()) setMV('design');
@@ -2591,7 +2570,7 @@ function ctlDown(e) {
   const elNow = $(`#designZoom .wclient [data-id="${id}"]`);
   const sx = e.clientX, sy = e.clientY, ox = c.x, oy = c.y; let moved = false;
   const mv = ev => {
-    const dx = (ev.clientX - sx) / zoom, dy = (ev.clientY - sy) / zoom;
+    const dx = (ev.clientX - sx) / zoom / uiS, dy = (ev.clientY - sy) / zoom / uiS;
     if (!moved && Math.hypot(dx, dy) < 3) return; moved = true;
     c.x = Math.round(ox + dx); c.y = Math.round(oy + dy);
     if (elNow) { elNow.style.left = c.x + 'px'; elNow.style.top = c.y + 'px'; const cl = elNow.parentNode; cl.querySelectorAll('.h').forEach(h => h.remove()); }
@@ -2609,7 +2588,7 @@ function resizeStart(e, id, k) {
   const o = id === 'form' ? F.form : byId(id);
   const sx = e.clientX, sy = e.clientY, ow = o.w, oh = o.h;
   const mv = ev => {
-    const dx = (ev.clientX - sx) / zoom, dy = (ev.clientY - sy) / zoom;
+    const dx = (ev.clientX - sx) / zoom / uiS, dy = (ev.clientY - sy) / zoom / uiS;
     if (k.includes('e')) o.w = Math.max(id === 'form' ? 120 : 8, Math.round(ow + dx));
     if (k.includes('s')) o.h = Math.max(id === 'form' ? 60 : 8, Math.round(oh + dy));
     renderDesigner();
@@ -3496,7 +3475,16 @@ $('#busyStop').onclick = () => { if (running) { stopRun(); setStatus('تم إي�
 addEventListener('resize', () => { fitRun(); });
 
 /* ================= views / layout ================= */
-const isMobile = () => matchMedia('(max-width:899px)').matches;
+const isMobile = () => matchMedia('(max-width:899px)').matches && !document.body.classList.contains('desk');
+function applyDesk() {
+  const on = true; // always show the full desktop (VS 2008) layout, also on phones
+  const small = matchMedia('(max-width:899px)').matches;
+  document.body.classList.toggle('desk', on && small);
+  const app = $('#app');
+  if (on && small) { uiS = innerWidth / 1100; app.style.transform = `scale(${uiS})`; app.style.height = (innerHeight / uiS) + 'px'; }
+  else { uiS = 1; app.style.transform = ''; app.style.height = ''; }
+}
+function setDesk(on) { try { localStorage.setItem('vbsimDesk', on ? '1' : '0'); } catch (e) { } applyDesk(); if (!isMobile()) { $('#vDesign').classList.toggle('act', view === 'design'); $('#vCode').classList.toggle('act', view === 'code'); } else { document.body.dataset.mv = view; syncMnav(); } renderDesigner(); renderHL(); }
 function showView(v) {
   if (isDO() && v === 'code' && !isModule()) v = 'design';
   if (isModule()) v = 'code';
@@ -3586,6 +3574,7 @@ const actions = {
   delete: deleteSel, format: () => { showView('code'); formatCode(); },
   design: () => showView('design'), code: () => showView('code'),
   errors: () => { showBottom('errors'); if (isMobile()) setMV('errors'); }, output: () => { showBottom('output'); if (isMobile()) setMV('errors'); },
+  deskview: () => setDesk(true), mobileview: () => setDesk(false),
   zin: () => setFs(codeFs + 2), zout: () => setFs(codeFs - 2),
   mode: async () => { const on = !isDO(); P.designOnly = on; if (!on && location.hash === '#design-only') history.replaceState(null, '', location.pathname + location.search); save(); applyMode(); renderProps(); setStatus(on ? 'وضع الخصائص فقط: تم إخفاء الكود والأحداث' : 'تم إظهار الكود والأحداث'); },
   task: async () => {
@@ -3750,6 +3739,7 @@ function showHelp() {
 }
 
 /* ================= init ================= */
+applyDesk();
 P = load() || newProject();
 if (location.hash === '#project-2020' && P.projId !== 'p2020') P = PROJECT_2020();
 setActive(P.active || P.startup || 'Form1');
@@ -3760,7 +3750,7 @@ showBottom('errors');
 if (isMobile()) { document.body.dataset.mv = 'design'; syncMnav(); }
 applyMode(); addEventListener('hashchange', applyMode);
 let wasMobile = isMobile();
-addEventListener('resize', () => { const m = isMobile(); if (m !== wasMobile) { wasMobile = m; if (m) { document.body.dataset.mv = view; syncMnav(); } else { $('#vDesign').classList.toggle('act', view === 'design'); $('#vCode').classList.toggle('act', view === 'code'); } renderHL(); } });
+addEventListener('resize', () => { applyDesk(); const m = isMobile(); if (m !== wasMobile) { wasMobile = m; if (m) { document.body.dataset.mv = view; syncMnav(); } else { $('#vDesign').classList.toggle('act', view === 'design'); $('#vCode').classList.toggle('act', view === 'code'); } renderHL(); } });
 let firstVisit = true; try { firstVisit = !localStorage.getItem('vbsimSeen'); localStorage.setItem('vbsimSeen', '1'); } catch (e) { }
 if (firstVisit && !F.ctls.length && !P.projId) setTimeout(showHelp, 400);
 if (isModule()) showView('code');
