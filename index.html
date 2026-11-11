@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>محاكي Visual Basic 2008 — منصة البرمجة للصف الثاني عشر</title>
 <style>*{box-sizing:border-box}
 :root{--bg:#bfcde4;--panel:#f5f7fb;--line:#8e9fbf;--title1:#e3ebf8;--title2:#c3d2ea;--sel:#316ac5;--code-fs:15px;--ui:"Segoe UI",Tahoma,Arial,sans-serif;--mono:Consolas,"Courier New",monospace}
@@ -251,6 +251,25 @@ body.desk #app{width:1100px;transform-origin:0 0;position:absolute;left:0;top:0}
 body.desk .mtitle{display:none!important}
 .tb[data-a=mobileview]{display:none}
 
+
+#designScroll,.wform,.wform *,.tray .comp{touch-action:manipulation}
+.design .ctl{touch-action:none}
+
+#sizer{position:relative;overflow:hidden}
+body:not(.desk) #sizer{width:auto!important;height:auto!important;overflow:visible}
+body.desk #zs{position:fixed;inset:0;overflow:auto;-webkit-overflow-scrolling:touch}
+#zoomCtl{display:none;position:fixed;left:8px;bottom:8px;z-index:90;align-items:center;gap:4px;background:rgba(255,255,255,.92);border:1px solid #8ea0c0;border-radius:20px;padding:3px 6px;box-shadow:0 2px 8px rgba(0,0,0,.25);font:13px var(--ui)}
+#zoomCtl button{width:34px;height:34px;border-radius:50%;border:1px solid #9fb0cf;background:#fff;font-size:20px;line-height:1;color:#1f3f7a;padding:0}
+#zoomCtl span{min-width:42px;text-align:center;font-weight:600;color:#1f3f7a}
+
+#tBar{display:none;direction:rtl;align-items:center;gap:6px;flex-wrap:wrap;padding:5px 8px;background:linear-gradient(#fff7d1,#ffe9a0);border-bottom:1px solid #d9b44a;font-size:13px}
+body.teacher #tBar{display:flex}
+#tBar .sub{color:#7a5d00;font-size:12px}
+#tBar button{border:1px solid #c9a53a;background:#fff;border-radius:4px;padding:4px 10px;cursor:pointer;font:13px var(--ui);color:#000}
+#tBar button:hover{background:#fff3c7}
+#tBar button.pub{background:#2ea043;border-color:#22863a;color:#fff;font-weight:700}
+#tBar .tst{color:#555;font-size:12px;margin-inline-start:auto}
+.tb[data-a=task],.tb[data-a=mode]{display:none!important}
 </style>
 </head>
 <body data-mv="design">
@@ -260,10 +279,8 @@ body.desk .mtitle{display:none!important}
     <button class="go" id="mRun">▶ تشغيل</button><button class="st" id="mStop" disabled>■</button><button id="mMenu">☰</button></div>
   <div class="menubar" id="menubar">
     <div><div class="mtop">File</div><div class="mdrop">
-      <div data-a="new">New Project <span class="k">مشروع جديد</span></div>
-      <div data-a="examples">Open Example… <span class="k">الأمثلة</span></div>
-      <hr><div data-a="export">Save Project As… <span class="k">حفظ كملف</span></div>
-      <div data-a="import">Open Project… <span class="k">فتح ملف</span></div>
+      <div data-a="saveall">Save All <span class="k">Ctrl+S</span></div>
+      <hr><div data-a="new">إعادة المشروع من البداية <span class="k">Reset</span></div>
       <hr><div data-a="task">📋 كتابة المطلوب <span class="k">للمعلمة</span></div>
     </div></div>
     <div><div class="mtop">Edit</div><div class="mdrop">
@@ -273,7 +290,7 @@ body.desk .mtitle{display:none!important}
     </div></div>
     <div><div class="mtop">View</div><div class="mdrop">
       <div data-a="design">Designer <span class="k">Shift+F7</span></div>
-      <div data-a="code">Code <span class="k">F7</span></div>
+      <div data-a="code">شاشة التعليمات البرمجية <span class="k">F7</span></div>
       <div data-a="errors">Error List</div>
       <div data-a="output">Output</div>
       <hr><div data-a="mode"><span><span id="modeLbl"></span>وضع الخصائص فقط (بدون كود)</span> <span class="k">Design only</span></div>
@@ -286,9 +303,6 @@ body.desk .mtitle{display:none!important}
       <hr><div data-a="startup">Startup Form… <span class="k">نموذج البدء</span></div>
       <div data-a="removefile">Remove Current File <span class="k">حذف الملف الحالي</span></div>
     </div></div>
-    <div><div class="mtop">Build</div><div class="mdrop">
-      <div data-a="build">Build WindowsApplication1 <span class="k">Ctrl+Shift+B</span></div>
-    </div></div>
     <div><div class="mtop">Debug</div><div class="mdrop">
       <div data-a="run">Start Debugging <span class="k">F5</span></div>
       <div data-a="stop">Stop Debugging <span class="k">Shift+F5</span></div>
@@ -299,17 +313,11 @@ body.desk .mtitle{display:none!important}
     </div></div>
   </div>
   <div class="toolbar">
-    <button class="tb" data-a="new" title="New Project">📄</button>
-    <button class="tb" data-a="examples" title="الأمثلة">📂 أمثلة</button>
-    <button class="tb" data-a="export" title="Save">💾</button>
-    <span class="sep"></span>
     <button class="tb run" data-a="run" id="tbRun" title="Start Debugging (F5)">▶ Start <span style="font-weight:400">(تشغيل F5)</span></button>
     <button class="tb stop" data-a="stop" id="tbStop" disabled title="Stop Debugging">■ Stop</button>
     <span class="sep"></span>
-    <button class="tb" data-a="build" title="Build">⚙ Build <span>(فحص الأخطاء)</span></button>
-    <span class="sep"></span>
     <button class="tb" data-a="design">🖼 Designer</button>
-    <button class="tb" data-a="code">📝 Code</button>
+    <button class="tb" data-a="code">📝 شاشة التعليمات البرمجية</button>
     <span class="sep"></span>
     <button class="tb" data-a="zout" title="تصغير خط الكود">A−</button>
     <button class="tb" data-a="zin" title="تكبير خط الكود">A+</button>
@@ -319,6 +327,13 @@ body.desk .mtitle{display:none!important}
     <button class="tb" data-a="help">❓ مساعدة</button>
     <button class="tb" data-a="mobileview">📱 عرض الهاتف</button>
   </div>
+  <div id="tBar"><b>👩‍🏫 وضع المعلمة</b> <span class="sub">عدّلي المشروع ثم انشريه — الطالبات لا يرين هذا الشريط</span>
+    <button data-a="publish" class="pub">📤 نشر المشروع للطالبات</button>
+    <button data-a="mode">🎨 خصائص فقط</button>
+    <button data-a="loadpub">📥 فتح النسخة المنشورة</button>
+    <button data-a="builtin">📂 مشروع 2020 الأصلي</button>
+    <button data-a="blank">📄 مشروع فارغ</button>
+    <span class="tst"></span></div>
   <div id="main">
     <div class="panel" id="pToolbox">
       <div class="ptitle">Toolbox <span class="sub">صندوق الأدوات</span></div>
@@ -369,6 +384,8 @@ body.desk .mtitle{display:none!important}
     <button data-m="errors"><span class="i">⚠</span>الأخطاء<span class="badge" id="mBadge" style="display:none"></span></button>
   </div>
 </div>
+<div id="zs"><div id="sizer"></div></div>
+<div id="zoomCtl"><button id="zOut">−</button><span id="zoomPct">100%</span><button id="zIn">+</button><button id="zReset" title="رجوع">⟲</button></div>
 <div id="runLayer"><div id="runWins"></div><button id="runStopFloat" class="xbtn">■ إيقاف البرنامج — Stop</button></div>
 <div id="busyBar"><span>⏳ البرنامج ما زال يعمل… (ربما حلقة لا نهائية)</span><button class="xbtn" id="busyStop">■ إيقاف</button></div>
 <input type="file" id="fileIn" accept=".vbsim,.json,.txt" hidden>
@@ -1541,6 +1558,7 @@ function check(prog, controls, errs, G, file) {
       if (BI[n.key]) return { kind: 'bi', b: BI[n.key] };
       if (VBC[n.key] !== undefined) return { kind: 'const' };
       if (NS[n.key]) return { kind: 'ns', ns: NS[n.key], key: n.key };
+      if (prog.kind !== 'module' && (CTRL.form.props[n.key] !== undefined || CTRL.form.methods[n.key])) return { kind: 'formmember', key: n.key };
       undeclared(n); return { kind: 'err' };
     }
     function lvalue(t) {
@@ -1646,6 +1664,7 @@ function check(prog, controls, errs, G, file) {
             case 'me': return { kind: 'me' };
             case 'formref': return r.f.key === (file.name || '').toLowerCase() ? { kind: 'me' } : { kind: 'formref', f: r.f };
             case 'modref': return { kind: 'modref', m: r.m };
+            case 'formmember': return CTRL.form.props[r.key] === 'string' ? { kind: 'type', base: 'string' } : null;
           }
           return null;
         }
@@ -2053,6 +2072,7 @@ class Runtime {
   async assign(t, v, fr, s) {
     if (t.k === 'Name') {
       const slot = this.findSlot(t.key, fr);
+      if (!slot && this.host.form && CTRL.form.props[t.key] !== undefined) { await this.setMember(this.host.form, t.key, v, t); return; }
       if (!slot) throw new VBError('MissingMemberException', `'${t.name}' is not declared.`, `${t.name} غير معرّف`);
       if (slot.arr) { if (v !== null && (!v || v.cls !== 'array')) throw new VBError('InvalidCastException', 'Value cannot be converted to an array.', 'لا يمكن إسناد قيمة عادية لمصفوفة كاملة — حددي رقم العنصر مثل a(0)'); slot.v = v; return; }
       slot.v = this.co(v, slot.base, s.line); return;
@@ -2104,7 +2124,7 @@ class Runtime {
     if (VBC[key] !== undefined) return VBC[key];
     if (BI[key]) { return await BI[key].fn([], []); }
     if (NS[key]) return { cls: 'ns', key, disp: NS[key].disp };
-    if (key === 'form1') return this.host.form;
+    if (this.host.form && (CTRL.form.props[key] !== undefined || CTRL.form.methods[key])) return await this.getMember(this.host.form, key, null, e);
     throw new VBError('MissingMemberException', `'${e.name}' is not declared.`, `${e.name} غير معرّف`);
   }
   async argRefs(args, fr) {
@@ -2141,6 +2161,7 @@ class Runtime {
       if (this.procs.has(key)) return await this.callUser(this.procs.get(key), e.args, fr, e.line);
       { const gp = this.sh.proc(key); if (gp) return await this.callUser(gp.p, e.args, fr, e.line, gp.rt); }
       if (BI[key]) return await this.callBI(BI[key], e.args, fr);
+      if (this.host.form && (CTRL.form.props[key] !== undefined || CTRL.form.methods[key])) { const vals = []; for (const a of e.args) vals.push(a ? await this.eval(a, fr) : undefined); return await this.getMember(this.host.form, key, vals, t); }
       const c = this.host.ctl(key); if (c) throw new VBError('MissingMemberException', `'${t.name}' is not a method.`, `${t.name} ليست دالة`);
       throw new VBError('MissingMemberException', `'${t.name}' is not declared.`, `${t.name} غير معرّف`);
     }
@@ -2361,7 +2382,7 @@ function applyMode() {
 }
 function renderTask() {
   const b = $('#taskBox'); const t = (P && P.task || '').trim();
-  b.style.display = t ? '' : 'none'; b.querySelector('.tt').textContent = t;
+  b.style.display = 'none'; // task banner removed (questions are inside the code) b.querySelector('.tt').textContent = t;
   b.onclick = () => b.classList.toggle('mini');
 }
 let P; // project
@@ -2527,9 +2548,13 @@ function renderDesigner() {
     el.addEventListener('pointerdown', ctlDown);
     cl.appendChild(el);
   }
-  cl.addEventListener('pointerdown', e => { if (e.target === cl) { select('form'); } });
-  w.querySelector('.wtitle').addEventListener('pointerdown', () => select('form'));
-  w.querySelector('.wtitle').addEventListener('dblclick', () => goEvent(F.name, 'Load'));
+  cl.addEventListener('pointerdown', e => {
+    if (e.target !== cl) return;
+    const now = Date.now();
+    if (lastTap.id === 'form' && now - lastTap.t < 450) { lastTap = { id: null, t: 0 }; goEvent(F.name, 'Load'); return; }
+    lastTap = { id: 'form', t: now }; if (sel !== 'form') select('form');
+  });
+  w.querySelector('.wtitle').addEventListener('pointerdown', () => { const now = Date.now(); if (lastTap.id === 'formt' && now - lastTap.t < 450) { lastTap = { id: null, t: 0 }; goEvent(F.name, 'Load'); return; } lastTap = { id: 'formt', t: now }; if (sel !== 'form') select('form'); });
   z.appendChild(w);
   // handles
   const s = selObj();
@@ -2578,7 +2603,7 @@ function ctlDown(e) {
   const up = ev => {
     document.removeEventListener('pointermove', mv); document.removeEventListener('pointerup', up);
     if (moved) { changed(false); renderDesigner(); return; }
-    else { const now = Date.now(); if (lastTap.id === id && now - lastTap.t < 400) { lastTap = { id: null, t: 0 }; defaultEvent(c); return; } lastTap = { id, t: now }; }
+    else { const now = Date.now(); if (lastTap.id === id && now - lastTap.t < 450) { lastTap = { id: null, t: 0 }; defaultEvent(c); return; } lastTap = { id, t: now }; }
     renderDesigner();
   };
   document.addEventListener('pointermove', mv); document.addEventListener('pointerup', up);
@@ -2855,7 +2880,7 @@ function syncScroll() { hlIn.style.transform = `translate(${-ta.scrollLeft}px,${
 ta.addEventListener('scroll', () => { syncScroll(); hideAC(); });
 let hlRaf = 0;
 ta.addEventListener('input', e => {
-  F.code = ta.value; if (curLine) curLine = 0;
+  F.code = ta.value; P.touched = true; if (curLine) curLine = 0;
   if (!hlRaf) hlRaf = requestAnimationFrame(() => { hlRaf = 0; renderHL(); });
   save(); scheduleCompile(); updateAC(e);
   updatePos();
@@ -3021,8 +3046,7 @@ function membersOfExpr(chain) {
   return [];
 }
 const CAP = {}; ('Text BackColor ForeColor Visible Enabled Width Height Left Top Font Tag RightToLeft Cursor Name Focus Show Hide BringToFront SendToBack Refresh Select Controls Close PerformClick TextAlign AutoSize BorderStyle Multiline ReadOnly PasswordChar MaxLength TextLength Clear SelectAll AppendText Checked Items SelectedIndex SelectedItem Sorted ClearSelected DropDownStyle Image SizeMode Value Minimum Maximum Step PerformStep Increment Interval Start Stop Length ToUpper ToLower Trim TrimStart TrimEnd Substring IndexOf LastIndexOf Contains StartsWith EndsWith Replace Insert Remove PadLeft PadRight Split ToCharArray Chars Equals CompareTo ToString Next NextDouble Sqrt Abs Round Pow Max Min Floor Ceiling Truncate Sin Cos Tan Atan Log Log10 Exp Sign PI E ToInt32 ToInt16 ToInt64 ToDouble ToSingle ToDecimal ToBoolean ToChar ToByte ToDateTime Parse TryParse MaxValue MinValue Empty IsNullOrEmpty Concat Format Join Compare FromArgb FromName Show WriteLine Write Print Exit DoEvents IsDigit IsLetter IsLetterOrDigit IsUpper IsLower IsWhiteSpace IsPunctuation Sort Reverse CrLf NewLine Cr Lf Tab Quote OkOnly OkCancel YesNo YesNoCancel Critical Question Exclamation Information Ok Cancel Yes No OK Message Year Month Day Hour Minute Second DayOfWeek ToShortDateString ToLongDateString ToShortTimeString AddDays Now Today VisualBasic Bold Italic Regular Underline GetUpperBound GetLength Rank Hand Error Warning Asterisk None MsgBox InputBox Val Mid Left Right Len UCase LCase InStr StrReverse').split(' ').forEach(w => CAP[w.toLowerCase()] = w);
-function updateAC(e) { hideAC(); return; }
-function updateAC_off(e) {
+function updateAC(e) {
   if (e && e.inputType && !e.inputType.startsWith('insert')) { hideAC(); return; }
   const s = ta.selectionStart; const v = ta.value; const ls = v.lastIndexOf('\n', s - 1) + 1; const before = v.slice(ls, s);
   if (/^[^']*'/.test(before.replace(/"[^"]*"/g, '')) || ((before.match(/"/g) || []).length % 2)) { hideAC(); return; }
@@ -3476,14 +3500,41 @@ addEventListener('resize', () => { fitRun(); });
 
 /* ================= views / layout ================= */
 const isMobile = () => matchMedia('(max-width:899px)').matches && !document.body.classList.contains('desk');
-function applyDesk() {
+let uz = 1;
+function applyDesk(keepFocus) {
   const on = true; // always show the full desktop (VS 2008) layout, also on phones
   const small = matchMedia('(max-width:899px)').matches;
   document.body.classList.toggle('desk', on && small);
-  const app = $('#app');
-  if (on && small) { uiS = innerWidth / 1100; app.style.transform = `scale(${uiS})`; app.style.height = (innerHeight / uiS) + 'px'; }
-  else { uiS = 1; app.style.transform = ''; app.style.height = ''; }
+  const app = $('#app'), sz = $('#sizer');
+  if (app.parentNode !== sz) sz.appendChild(app);
+  const W = document.documentElement.clientWidth, H = document.documentElement.clientHeight;
+  if (on && small) {
+    const base = W / 1100; uiS = base * uz;
+    app.style.transform = `scale(${uiS})`; app.style.height = (H / base) + 'px';
+    sz.style.width = (1100 * uiS) + 'px'; sz.style.height = (H * uz) + 'px';
+    $('#zoomCtl').style.display = 'flex'; $('#zoomPct').textContent = Math.round(uz * 100) + '%';
+  } else { uz = 1; uiS = 1; app.style.transform = ''; app.style.height = ''; sz.style.width = sz.style.height = '0'; $('#zoomCtl').style.display = 'none'; }
 }
+function setUZ(n, fx, fy) {
+  const zs = $('#zs'); const old = uiS; fx = fx === undefined ? zs.clientWidth / 2 : fx; fy = fy === undefined ? zs.clientHeight / 2 : fy;
+  const cx = (zs.scrollLeft + fx) / old, cy = (zs.scrollTop + fy) / old;
+  uz = Math.max(1, Math.min(4, n)); applyDesk();
+  zs.scrollLeft = cx * uiS - fx; zs.scrollTop = cy * uiS - fy;
+  hideAC();
+}
+(function pinch() {
+  let d0 = 0, z0 = 1;
+  const dist = t => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+  document.addEventListener('touchstart', e => { if (e.touches.length === 2 && document.body.classList.contains('desk') && !document.querySelector('#runLayer.on,.dlgLayer')) { d0 = dist(e.touches); z0 = uz; } }, { passive: true });
+  document.addEventListener('touchmove', e => {
+    if (e.touches.length === 2 && d0) {
+      e.preventDefault();
+      const mx = (e.touches[0].clientX + e.touches[1].clientX) / 2, my = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+      setUZ(z0 * dist(e.touches) / d0, mx, my);
+    }
+  }, { passive: false });
+  document.addEventListener('touchend', e => { if (e.touches.length < 2) d0 = 0; }, { passive: true });
+})();
 function setDesk(on) { try { localStorage.setItem('vbsimDesk', on ? '1' : '0'); } catch (e) { } applyDesk(); if (!isMobile()) { $('#vDesign').classList.toggle('act', view === 'design'); $('#vCode').classList.toggle('act', view === 'code'); } else { document.body.dataset.mv = view; syncMnav(); } renderDesigner(); renderHL(); }
 function showView(v) {
   if (isDO() && v === 'code' && !isModule()) v = 'design';
@@ -3509,8 +3560,8 @@ function openFile(name, v) {
 function renderSolx() {
   const box = $('#solx'); if (!box) return;
   const errFiles = new Set((compiled ? compiled.errors : []).map(e => e.file));
-  box.innerHTML = `📁 Solution 'WindowsApplication1'<div class="ind">📦 WindowsApplication1<div class="ind">📂 My Project` +
-    P.files.map(f => `<div class="sxf${f === F ? ' act' : ''}" data-f="${esc(f.name)}">${f.kind === 'form' ? '🗔' : '📄'} ${esc(f.name)}.vb${f.name === P.startup ? ' <span class="st">(بدء)</span>' : ''}${errFiles.has(f.name) ? ' <span class="eicon">!</span>' : ''}</div>`).join('') + `</div></div>`;
+  box.innerHTML = `<div>` +
+    P.files.map(f => `<div class="sxf${f === F ? ' act' : ''}" data-f="${esc(f.name)}">${f.kind === 'form' ? '🗔' : '📄'} ${esc(f.name)}.vb${f.name === P.startup ? ' <span class="st">(بدء)</span>' : ''}${errFiles.has(f.name) ? ' <span class="eicon">!</span>' : ''}</div>`).join('') + `</div>`;
   box.querySelectorAll('.sxf').forEach(d => { d.onclick = () => openFile(d.dataset.f); d.ondblclick = () => openFile(d.dataset.f, 'code'); });
 }
 function renderMFile() {
@@ -3556,7 +3607,7 @@ function showBottom(b) { $$('.btab').forEach(t => t.classList.toggle('act', t.da
 $$('.btab').forEach(t => t.onclick = () => showBottom(t.dataset.b));
 function setStatus(msg, cls) { $('#stMsg').textContent = msg; const s = $('#status'); s.classList.remove('running', 'err'); if (cls) s.classList.add(cls); }
 function changed(structural) {
-  save();
+  P.touched = true; save();
   if (view === 'design' || !isMobile()) renderDesigner();
   if (structural) { syncObjSel(); renderCodeBar(); }
   if (propTab === 'props' && document.activeElement && document.activeElement.closest && document.activeElement.closest('#propGrid')) { } else renderProps();
@@ -3567,7 +3618,11 @@ function setFs(n) { codeFs = Math.max(10, Math.min(30, n)); document.documentEle
 
 /* ================= menus & actions ================= */
 const actions = {
-  new: async () => { if (await confirmAr('إنشاء مشروع جديد؟ سيتم حذف التصميم والكود الحاليين.')) { loadProject(newProject()); } },
+  new: async () => { if (await confirmAr('إعادة المشروع من البداية؟ سيتم حذف كل ما عملتِه فيه.')) { loadProject(baseProject()); } },
+  publish: publishProject, loadpub: async () => { if (!pubDoc) return dialog({ title: 'النسخة المنشورة', body: 'لم يتم نشر أي نسخة بعد.', icon: 64, rtl: true }); if (await confirmAr('فتح النسخة المنشورة حالياً للطالبات؟ ستُستبدل تعديلاتك غير المنشورة.')) loadProject(pubProject(pubDoc)); },
+  blank: async () => { if (await confirmAr('بدء مشروع جديد فارغ (Form1 فقط)؟ ستُحذف تعديلاتك غير المنشورة.')) { const p = newProject(); p.projId = 'pub'; p.touched = true; loadProject(p); } },
+  builtin: async () => { if (await confirmAr('فتح مشروع 2020 الأصلي للتعديل عليه؟')) { const p = PROJECT_2020(); p.projId = 'pub'; loadProject(p); } },
+  saveall: () => { P.savedAt = Date.now(); save(); setStatus('✔ تم حفظ المشروع — Item(s) Saved'); dialog({ title: 'Save All', body: '✔ تم حفظ المشروع بنجاح.\nItem(s) Saved', icon: 64, rtl: true }); },
   addform: () => addFile('form'), addmodule: () => addFile('module'), startup: setStartup, removefile: removeFile,
   examples: showExamples, export: exportProject, import: importProject,
   undo: () => { ta.focus(); document.execCommand('undo'); },
@@ -3595,7 +3650,8 @@ document.addEventListener('click', e => {
 $$('.menubar .mtop').forEach(m => m.addEventListener('mouseenter', () => { if (document.querySelector('.menubar .open') && !m.parentNode.classList.contains('open')) { $$('.menubar .open').forEach(x => x.classList.remove('open')); m.parentNode.classList.add('open'); } }));
 $('#mRun').onclick = startRun; $('#mStop').onclick = () => stopRun();
 $('#mMenu').onclick = async () => {
-  const items = [['addform', '➕ إضافة Form'], ['addmodule', '➕ إضافة Module'], ['startup', '▶ نموذج بدء التشغيل'], ['examples', '📂 الأمثلة والمشاريع الجاهزة'], ['new', '📄 مشروع جديد'], ['build', '⚙ فحص الأخطاء (Build)'], ['format', '⇆ تنسيق الكود'], ['export', '💾 حفظ المشروع كملف'], ['import', '📥 فتح مشروع'], ['mode', isDO() ? '📝 إظهار الكود والأحداث' : '🎨 وضع الخصائص فقط (بدون كود)'], ['task', '📋 كتابة المطلوب (للمعلمة)'], ['zin', 'A+ تكبير خط الكود'], ['zout', 'A− تصغير خط الكود'], ['help', '❓ طريقة الاستخدام']];
+  const items0 = [['addform', '➕ إضافة Form'], ['addmodule', '➕ إضافة Module'], ['startup', '▶ نموذج بدء التشغيل'], ['saveall', '💾 حفظ (Save All)'], ['new', '↺ إعادة المشروع من البداية'], ['help', '❓ طريقة الاستخدام']];
+  const items = items0.concat([]).filter(Boolean); if (false) items.push(0);
   const box = html(`<div class="exlist">${items.map(([a, t]) => `<button data-x="${a}">${t}</button>`).join('')}</div>`);
   let pick = null; box.querySelectorAll('button').forEach(b => b.onclick = () => { pick = b.dataset.x; box.closest('.dlgLayer').querySelector('.x').click(); });
   await dialog({ title: 'القائمة', body: box, buttons: [['إغلاق', 0]] });
@@ -3606,7 +3662,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'F5') { e.preventDefault(); if (e.shiftKey) stopRun(); else startRun(); return; }
   if (e.key === 'F7') { e.preventDefault(); showView(e.shiftKey ? 'design' : 'code'); return; }
   if (e.key === 'F1') { e.preventDefault(); showHelp(); return; }
-  if (e.ctrlKey && e.shiftKey && (e.key === 'B' || e.key === 'b')) { e.preventDefault(); buildCmd(); return; }
+  if (e.ctrlKey && !e.shiftKey && (e.key === 's' || e.key === 'S')) { e.preventDefault(); actions.saveall(); return; }
   if (running) return;
   const tag = (document.activeElement || {}).tagName;
   if (view === 'design' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(tag)) {
@@ -3667,7 +3723,7 @@ const PROJECT_2020 = () => {
   const m1 = buildFile('Module1', 'module', null, null,
     `Module Module1\n    ' متغيرات وثوابت عامة يستخدمها المشروع (لا تحذفيها)\n    Public users As String\n    Public views As Integer = 1\n    Public count As Integer\n    Public Const programmer As String = "طالبة الصف الثاني عشر"\n\n    ' ===== السؤال 7 =====\n    ' أعلني عن متغير على مستوى المشروع اسمه (total) ونوعه (Integer)\n\n\nEnd Module\n`);
   p.files = [f1, f2, f3, f4, m1]; p.startup = 'Form1'; p.active = 'Form1'; p.projId = 'p2020';
-  p.task = 'المشروع (2020):\n1) أضيفي إلى المشروع نموذجاً جديداً (Form5) ← من قائمة Project ← Add Windows Form\n2) أضيفي إلى المشروع وحدة نمطية (Module2) ← من قائمة Project ← Add Module\n3) افتحي Form4 وأضيفي الكائنات المطلوبة (مكتوبة في كود Form4)\n4) افتحي Form2 واضبطي الخصائص حسب الجدول (مكتوب في كود Form2)\n5) و 6) و 7) الأسئلة مكتوبة داخل الأحداث في كود Form1 و Form3 و Module1 — أكملي الفراغات ____ واكتبي التعليمات\n8) احفظي المشروع ← زر 💾';
+  p.task = '';
   P = saveP; return p;
 };
 const EXAMPLES = [
@@ -3735,13 +3791,63 @@ function showHelp() {
 <h3>📝 ٢. اكتبي الكود (Code)</h3><ul><li>انقري مرتين على الأداة (أو اضغطي ✎ الكود) فيُنشأ لكِ الحدث تلقائياً، مثل <code>Button1_Click</code>.</li><li>اكتبي الأوامر بين <code>Private Sub</code> و <code>End Sub</code>.</li><li>عند الضغط على Enter تُضاف <code>End If</code> و<code>Next</code> وغيرها تلقائياً، وتظهر قائمة اقتراحات بعد كتابة النقطة.</li></ul>
 <h3>⚠ ٣. تأكدي من صحة الكود</h3><ul><li>الأخطاء تظهر تلقائياً أثناء الكتابة: <span style="text-decoration:underline wavy red">خط أحمر</span> تحت الخطأ، وتظهر في <b>Error List</b> مع شرح بالعربي.</li><li>انقري على الخطأ لينقلك إلى السطر.</li></ul>
 <h3>▶ ٤. شغّلي البرنامج</h3><ul><li>اضغطي <b>▶ Start</b> أو <b>F5</b>. تظهر نافذة البرنامج، فجرّبيه.</li><li>إذا حدث خطأ أثناء التشغيل (مثل القسمة على صفر أو إدخال نص بدل رقم) يُشرح لكِ ويُظلَّل السطر.</li><li>لإيقاف البرنامج اضغطي ✕ في نافذته أو <b>■ Stop</b>.</li></ul>
-<h3>📚 أهم الأوامر</h3><ul><li><code>MsgBox("مرحبا")</code> لعرض رسالة، و<code>Label1.Text = "..."</code> لكتابة نص في الأداة.</li><li><code>Dim x As Integer</code> لتعريف متغير، و<code>Val(TextBox1.Text)</code> لتحويل المُدخل إلى رقم.</li><li><code>If … Then … Else … End If</code> للشرط، و<code>For i = 1 To 10 … Next</code> للتكرار.</li></ul><h3>💡 نصائح</h3><ul><li>العمل يُحفظ تلقائياً في المتصفح. للاحتفاظ بنسخة استخدمي «حفظ المشروع كملف».</li><li>على الهاتف استخدمي التبويبات في الأسفل، وشريط الرموز فوق لوحة المفاتيح.</li><li>جرّبي المثال <b>«فيه أخطاء! صحّحيها»</b> للتدرب على قائمة الأخطاء.</li></ul></div>`), buttons: [['فهمت ✔', 1]] });
+<h3>📚 أهم الأوامر</h3><ul><li><code>MsgBox("مرحبا")</code> لعرض رسالة، و<code>Label1.Text = "..."</code> لكتابة نص في الأداة.</li><li><code>Dim x As Integer</code> لتعريف متغير، و<code>Val(TextBox1.Text)</code> لتحويل المُدخل إلى رقم.</li><li><code>If … Then … Else … End If</code> للشرط، و<code>For i = 1 To 10 … Next</code> للتكرار.</li></ul><h3>💡 نصائح</h3><ul><li>العمل يُحفظ تلقائياً في المتصفح، ويمكنكِ الحفظ من File ← Save All أو Ctrl+S.</li><li>على الهاتف اقلبي الجهاز بالعرض ليكون العرض أوضح.</li></ul></div>`), buttons: [['فهمت ✔', 1]] });
+}
+
+/* ================= teacher publishing (shared db) ================= */
+let DBH = null, isTeacher = false, pubDoc = null;
+function pubProject(d) { const p = migrate(JSON.parse(d.proj)); p.projId = 'pub'; p.pubVer = d.ver; p.touched = false; return p; }
+function baseProject() { if (pubDoc) { try { return pubProject(pubDoc); } catch (e) { } } return PROJECT_2020(); }
+async function publishProject() {
+  if (!DBH || !isTeacher) return dialog({ title: 'نشر', body: 'النشر متاح للمعلمة فقط من رابط المنصة على claude.ai.', icon: 48, rtl: true });
+  if (running) stopRun(true);
+  const r = doCompile();
+  const warn = r.errors.length ? `\n\nملاحظة: في المشروع ${r.errors.length} أخطاء/فراغات ستظهر للطالبات في قائمة الأخطاء (هذا طبيعي إذا كانت فراغات ____ للحل).` : '';
+  if (!(await confirmAr('نشر المشروع الحالي للطالبات؟\nكل طالبة تفتح المنصة ستحصل على هذه النسخة.' + warn))) return;
+  const proj = JSON.parse(JSON.stringify(P)); delete proj.touched; delete proj.savedAt; proj.active = proj.startup; proj.designOnly = !!P.designOnly;
+  const body = JSON.stringify(proj);
+  if (body.length > 240000) return dialog({ title: 'خطأ', body: 'حجم المشروع كبير جداً للنشر (غالباً بسبب الصور). استخدمي صوراً أصغر أو صوراً من مكتبة الصور.', icon: 16, rtl: true });
+  const ver = Date.now();
+  try {
+    setStatus('⏳ جارٍ النشر…');
+    await DBH.doc('published/project').set({ proj: body, ver, at: new Date().toISOString() });
+    pubDoc = { proj: body, ver }; P.projId = 'pub'; P.pubVer = ver; P.touched = false; save(); renderTeacher();
+    setStatus('✔ تم نشر المشروع للطالبات');
+    dialog({ title: 'تم النشر', body: '✔ تم نشر المشروع للطالبات.\nعند فتح الطالبة للمنصة ستظهر لها هذه النسخة تلقائياً.', icon: 64, rtl: true });
+  } catch (e) { setStatus('تعذّر النشر'); dialog({ title: 'خطأ', body: 'تعذّر النشر: ' + (e && e.message || e), icon: 16, rtl: true }); }
+}
+function renderTeacher() {
+  document.body.classList.toggle('teacher', isTeacher);
+  const b = $('#tBar'); if (!b) return;
+  const pub = pubDoc ? new Date(pubDoc.ver).toLocaleString('ar-KW', { dateStyle: 'short', timeStyle: 'short' }) : 'لم يُنشر بعد';
+  b.querySelector('.tst').textContent = `آخر نشر: ${pub}` + (P.touched && P.pubVer !== undefined && pubDoc ? ' — لديك تعديلات غير منشورة' : (P.touched && !pubDoc ? ' — لديك تعديلات غير منشورة' : ''));
+}
+async function initCloud() {
+  try {
+    if (!window.claude || !window.claude.use) return;
+    const [db, user] = await Promise.all([window.claude.use('db'), window.claude.use('user')]);
+    DBH = db;
+    try { isTeacher = user ? !!(await user.isOwner()) : false; } catch (e) { isTeacher = false; }
+    renderTeacher();
+    if (!DBH) return;
+    let snap = null;
+    try { snap = await Promise.race([DBH.doc('published/project').get(), new Promise((_, rj) => setTimeout(() => rj('timeout'), 10000))]); } catch (e) { return; }
+    if (!snap || !snap.exists) { renderTeacher(); return; }
+    pubDoc = snap.data(); renderTeacher();
+    if (P.projId === 'pub' && P.pubVer === pubDoc.ver) return;
+    if (isTeacher) { if (!P.touched) loadProject(pubProject(pubDoc)); renderTeacher(); return; }
+    if (P.touched && P.projId === 'pub') {
+      const ok = await dialog({ title: 'نسخة جديدة', body: 'نشرت المعلمة نسخة جديدة من المشروع.\nهل تريدين فتحها الآن؟ (سيُستبدل عملك الحالي)', icon: 32, rtl: true, buttons: [['نعم، افتحيها', true], ['لاحقاً', false]] });
+      if (!ok) return;
+    }
+    loadProject(pubProject(pubDoc));
+  } catch (e) { console.warn(e); }
 }
 
 /* ================= init ================= */
 applyDesk();
 P = load() || newProject();
-if (location.hash === '#project-2020' && P.projId !== 'p2020') P = PROJECT_2020();
+if (P.projId !== 'p2020' && P.projId !== 'pub') P = PROJECT_2020();
 setActive(P.active || P.startup || 'Form1');
 try { const fs = +localStorage.getItem('vbsimFs'); if (fs) codeFs = fs; } catch (e) { }
 document.documentElement.style.setProperty('--code-fs', codeFs + 'px');
@@ -3755,6 +3861,9 @@ let firstVisit = true; try { firstVisit = !localStorage.getItem('vbsimSeen'); lo
 if (firstVisit && !F.ctls.length && !P.projId) setTimeout(showHelp, 400);
 if (isModule()) showView('code');
 $('#runStopFloat').onclick = () => stopRun();
+setTimeout(initCloud, 0);
+setInterval(() => { if (isTeacher) renderTeacher(); }, 3000);
+$('#zIn').onclick = () => setUZ(uz + 0.5); $('#zOut').onclick = () => setUZ(uz - 0.5); $('#zReset').onclick = () => { setUZ(1); $('#zs').scrollLeft = 0; $('#zs').scrollTop = 0; };
 $('#mFile').onchange = e => { const v = e.target.value; if (v === '+form' || v === '+module') { renderMFile(); addFile(v.slice(1)); } else openFile(v); };
 })();
 </script>
