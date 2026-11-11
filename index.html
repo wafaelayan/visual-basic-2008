@@ -390,6 +390,7 @@ body.teacher #tBar{display:flex}
 <div id="busyBar"><span>⏳ البرنامج ما زال يعمل… (ربما حلقة لا نهائية)</span><button class="xbtn" id="busyStop">■ إيقاف</button></div>
 <input type="file" id="fileIn" accept=".vbsim,.json,.txt" hidden>
 <input type="file" id="imgIn" accept="image/*" hidden>
+<script id="embeddedProject" type="application/json">null</script>
 <script>/* ===================== VB 2008 language engine: lexer, parser, checker, interpreter ===================== */
 const VB = (function () {
 'use strict';
@@ -3619,7 +3620,7 @@ function setFs(n) { codeFs = Math.max(10, Math.min(30, n)); document.documentEle
 /* ================= menus & actions ================= */
 const actions = {
   new: async () => { if (await confirmAr('إعادة المشروع من البداية؟ سيتم حذف كل ما عملتِه فيه.')) { loadProject(baseProject()); } },
-  publish: publishProject, loadpub: async () => { if (!pubDoc) return dialog({ title: 'النسخة المنشورة', body: 'لم يتم نشر أي نسخة بعد.', icon: 64, rtl: true }); if (await confirmAr('فتح النسخة المنشورة حالياً للطالبات؟ ستُستبدل تعديلاتك غير المنشورة.')) loadProject(pubProject(pubDoc)); },
+  publish: publishProject, loadpub: async () => { if (!pubDoc && EMB) { if (await confirmAr('فتح النسخة المنشورة حالياً؟ ستُستبدل تعديلاتك غير المنشورة.')) loadProject(embProject()); return; } if (!pubDoc) return dialog({ title: 'النسخة المنشورة', body: 'لم يتم نشر أي نسخة بعد.', icon: 64, rtl: true }); if (await confirmAr('فتح النسخة المنشورة حالياً للطالبات؟ ستُستبدل تعديلاتك غير المنشورة.')) loadProject(pubProject(pubDoc)); },
   blank: async () => { if (await confirmAr('بدء مشروع جديد فارغ (Form1 فقط)؟ ستُحذف تعديلاتك غير المنشورة.')) { const p = newProject(); p.projId = 'pub'; p.touched = true; loadProject(p); } },
   builtin: async () => { if (await confirmAr('فتح مشروع 2020 الأصلي للتعديل عليه؟')) { const p = PROJECT_2020(); p.projId = 'pub'; loadProject(p); } },
   saveall: () => { P.savedAt = Date.now(); save(); setStatus('✔ تم حفظ المشروع — Item(s) Saved'); dialog({ title: 'Save All', body: '✔ تم حفظ المشروع بنجاح.\nItem(s) Saved', icon: 64, rtl: true }); },
@@ -3795,10 +3796,40 @@ function showHelp() {
 }
 
 /* ================= teacher publishing (shared db) ================= */
-let DBH = null, isTeacher = false, pubDoc = null;
+let DBH = null, isTeacher = location.hash === '#teacher', cloudOwner = false, pubDoc = null;
+const EMB = (() => { try { const e = document.getElementById('embeddedProject'); const v = e && JSON.parse(e.textContent); return v && v.proj ? v : null; } catch (er) { return null; } })();
+function embProject() { const p = migrate(JSON.parse(JSON.stringify(EMB.proj))); p.projId = 'pub'; p.pubVer = EMB.ver; p.touched = false; return p; }
+async function checkEmbedded() {
+  if (!EMB || pubDoc) return;
+  if (P.projId === 'pub' && P.pubVer === EMB.ver) return;
+  if (isTeacher) { if (!P.touched) loadProject(embProject()); renderTeacher(); return; }
+  if (P.touched && P.projId === 'pub') {
+    const ok = await dialog({ title: 'نسخة جديدة', body: 'نشرت المعلمة نسخة جديدة من المشروع.\nهل تريدين فتحها الآن؟ (سيُستبدل عملك الحالي)', icon: 32, rtl: true, buttons: [['نعم، افتحيها', true], ['لاحقاً', false]] });
+    if (!ok) return;
+  }
+  loadProject(embProject());
+}
+async function exportSite() {
+  if (running) stopRun(true);
+  let src = null;
+  try { const r = await fetch(location.href.split('#')[0], { cache: 'no-store' }); if (r.ok) src = await r.text(); } catch (e) { }
+  if (!src || !src.includes('id="embeddedProject"')) return dialog({ title: 'تعذّر التصدير', body: 'افتحي المنصة من موقعك على الإنترنت (Vercel) ثم أضيفي #teacher إلى آخر الرابط وحاولي مرة أخرى.', icon: 16, rtl: true });
+  const r2 = doCompile();
+  const warn = r2.errors.length ? `\n\nملاحظة: في المشروع ${r2.errors.length} فراغات/أخطاء ستظهر للطالبات في قائمة الأخطاء.` : '';
+  if (!(await confirmAr('تنزيل ملف المنصة (index.html) وفيه مشروعك الحالي؟' + warn))) return;
+  const proj = JSON.parse(JSON.stringify(P)); delete proj.touched; delete proj.savedAt; delete proj.pubVer; proj.active = proj.startup;
+  const ver = Date.now();
+  const json = JSON.stringify({ proj, ver }).replace(/</g, '\\u003c');
+  const out = src.replace(/(<script id="embeddedProject" type="application\/json">)[\s\S]*?(<\/script>)/, (m, a, b) => a + json + b);
+  try { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([out], { type: 'text/html' })); a.download = 'index.html'; document.body.appendChild(a); a.click(); a.remove(); }
+  catch (e) { return dialog({ title: 'خطأ', body: 'تعذّر تنزيل الملف.', icon: 16, rtl: true }); }
+  P.projId = 'pub'; P.pubVer = ver; P.touched = false; save(); renderTeacher();
+  dialog({ title: 'تم تنزيل الملف', body: html(`<div class="rtl" style="font-size:14px;line-height:1.9">✔ تم تنزيل الملف <b>index.html</b> وفيه مشروعك.<br><b>لنشره للطالبات:</b><br>١. افتحي مشروعك في Vercel (أو GitHub إذا كان مربوطاً به).<br>٢. استبدلي الملف القديم index.html بالملف الجديد.<br>٣. بعد اكتمال النشر، تفتح الطالبات الموقع فتظهر لهن النسخة الجديدة تلقائياً.</div>`), buttons: [['فهمت ✔', 1]] });
+}
 function pubProject(d) { const p = migrate(JSON.parse(d.proj)); p.projId = 'pub'; p.pubVer = d.ver; p.touched = false; return p; }
-function baseProject() { if (pubDoc) { try { return pubProject(pubDoc); } catch (e) { } } return PROJECT_2020(); }
+function baseProject() { if (pubDoc) { try { return pubProject(pubDoc); } catch (e) { } } if (EMB) { try { return embProject(); } catch (e) { } } return PROJECT_2020(); }
 async function publishProject() {
+  if (!(DBH && cloudOwner)) return exportSite();
   if (!DBH || !isTeacher) return dialog({ title: 'نشر', body: 'النشر متاح للمعلمة فقط من رابط المنصة على claude.ai.', icon: 48, rtl: true });
   if (running) stopRun(true);
   const r = doCompile();
@@ -3819,7 +3850,9 @@ async function publishProject() {
 function renderTeacher() {
   document.body.classList.toggle('teacher', isTeacher);
   const b = $('#tBar'); if (!b) return;
-  const pub = pubDoc ? new Date(pubDoc.ver).toLocaleString('ar-KW', { dateStyle: 'short', timeStyle: 'short' }) : 'لم يُنشر بعد';
+  const pv = pubDoc ? pubDoc.ver : (EMB ? EMB.ver : 0);
+  const pub = pv ? new Date(pv).toLocaleString('ar-KW', { dateStyle: 'short', timeStyle: 'short' }) : 'لم يُنشر بعد';
+  const pb = b.querySelector('.pub'); if (pb) pb.textContent = (DBH && cloudOwner) ? '📤 نشر المشروع للطالبات' : '📤 تنزيل ملف المنصة للنشر (index.html)';
   b.querySelector('.tst').textContent = `آخر نشر: ${pub}` + (P.touched && P.pubVer !== undefined && pubDoc ? ' — لديك تعديلات غير منشورة' : (P.touched && !pubDoc ? ' — لديك تعديلات غير منشورة' : ''));
 }
 async function initCloud() {
@@ -3827,7 +3860,8 @@ async function initCloud() {
     if (!window.claude || !window.claude.use) return;
     const [db, user] = await Promise.all([window.claude.use('db'), window.claude.use('user')]);
     DBH = db;
-    try { isTeacher = user ? !!(await user.isOwner()) : false; } catch (e) { isTeacher = false; }
+    try { cloudOwner = user ? !!(await user.isOwner()) : false; } catch (e) { cloudOwner = false; }
+    if (cloudOwner) isTeacher = true;
     renderTeacher();
     if (!DBH) return;
     let snap = null;
@@ -3847,7 +3881,7 @@ async function initCloud() {
 /* ================= init ================= */
 applyDesk();
 P = load() || newProject();
-if (P.projId !== 'p2020' && P.projId !== 'pub') P = PROJECT_2020();
+if (P.projId !== 'p2020' && P.projId !== 'pub') P = (EMB ? embProject() : PROJECT_2020());
 setActive(P.active || P.startup || 'Form1');
 try { const fs = +localStorage.getItem('vbsimFs'); if (fs) codeFs = fs; } catch (e) { }
 document.documentElement.style.setProperty('--code-fs', codeFs + 'px');
@@ -3861,7 +3895,8 @@ let firstVisit = true; try { firstVisit = !localStorage.getItem('vbsimSeen'); lo
 if (firstVisit && !F.ctls.length && !P.projId) setTimeout(showHelp, 400);
 if (isModule()) showView('code');
 $('#runStopFloat').onclick = () => stopRun();
-setTimeout(initCloud, 0);
+setTimeout(async () => { renderTeacher(); await checkEmbedded(); initCloud(); }, 0);
+addEventListener('hashchange', () => { if (location.hash === '#teacher') { isTeacher = true; renderTeacher(); } });
 setInterval(() => { if (isTeacher) renderTeacher(); }, 3000);
 $('#zIn').onclick = () => setUZ(uz + 0.5); $('#zOut').onclick = () => setUZ(uz - 0.5); $('#zReset').onclick = () => { setUZ(1); $('#zs').scrollLeft = 0; $('#zs').scrollTop = 0; };
 $('#mFile').onchange = e => { const v = e.target.value; if (v === '+form' || v === '+module') { renderMFile(); addFile(v.slice(1)); } else openFile(v); };
