@@ -422,7 +422,7 @@ body.teacher #tBar{display:flex}
 <div id="busyBar"><span>⏳ البرنامج ما زال يعمل… (ربما حلقة لا نهائية)</span><button class="xbtn" id="busyStop">■ إيقاف</button></div>
 <input type="file" id="fileIn" accept=".vbsim,.json,.txt" hidden>
 <input type="file" id="imgIn" accept="image/*" hidden>
-<script id="embeddedProject" type="application/json">null</script>
+<script id="embeddedProject" type="application/json">{"proj": {"files": [{"name": "Form1", "kind": "form", "form": {"text": "تسجيل الدخول", "w": 320, "h": 230, "backColor": "Control", "foreColor": "ControlText", "font": {"name": "Microsoft Sans Serif", "size": 8.25, "bold": false}, "rtl": false}, "ctls": [{"id": 1, "type": "label", "name": "Label1", "x": 20, "y": 26, "w": 39, "h": 13, "text": "اسم المستخدم:", "backColor": "Transparent", "foreColor": "ControlText", "font": null, "visible": true, "enabled": true, "rtl": false, "autoSize": true, "borderStyle": "None", "textAlign": "TopLeft"}, {"id": 2, "type": "textbox", "name": "TextBox1", "x": 120, "y": 22, "w": 170, "h": 20, "text": "", "backColor": "Window", "foreColor": "WindowText", "font": null, "visible": true, "enabled": true, "rtl": false, "multiline": false, "readOnly": false, "passwordChar": "", "maxLength": 32767, "textAlign": "Left"}, {"id": 3, "type": "label", "name": "Label2", "x": 20, "y": 62, "w": 39, "h": 13, "text": "كلمة السر:", "backColor": "Transparent", "foreColor": "ControlText", "font": null, "visible": true, "enabled": true, "rtl": false, "autoSize": true, "borderStyle": "None", "textAlign": "TopLeft"}, {"id": 4, "type": "textbox", "name": "TextBox2", "x": 120, "y": 58, "w": 170, "h": 20, "text": "", "backColor": "Window", "foreColor": "WindowText", "font": null, "visible": true, "enabled": true, "rtl": false, "multiline": false, "readOnly": false, "passwordChar": "*", "maxLength": 32767, "textAlign": "Left"}, {"id": 5, "type": "button", "name": "Button1", "x": 120, "y": 100, "w": 80, "h": 30, "text": "دخول", "backColor": "Control", "foreColor": "ControlText", "font": null, "visible": true, "enabled": true, "rtl": false, "textAlign": "MiddleCenter"}, {"id": 6, "type": "button", "name": "Button2", "x": 210, "y": 100, "w": 80, "h": 30, "text": "خروج", "backColor": "Control", "foreColor": "ControlText", "font": null, "visible": true, "enabled": true, "rtl": false, "textAlign": "MiddleCenter"}], "code": "Public Class Form1\n    ' 1) أعلني عن ثابت على مستوى النموذج الأول حيث أن اسم الثابت (x) ونوعه String وقيمته (wafra)\n    --------------------\n\n    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click\n        ' 2) اكتبي التعليمة البرمجية لتخصيص اسم المستخدم المكتوب في (TextBox1) للمتغير users\n        --------------------\n\n        ' 3) أكملي تعليمة If..Then للتأكد من صحة كلمة السر من خلال التحقق من TextBox2 أنها تساوي (12) ثم إظهار رسالة للمستخدم (\"welcome\")\n        If -------------- Then --------------\n    End Sub\n\n    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click\n        ' 4) اكتبي التعليمة البرمجية لإنهاء البرنامج\n        --------------------\n    End Sub\nEnd Class\n"}, {"name": "Form2", "kind": "form", "form": {"text": "Form2", "w": 330, "h": 260, "backColor": "Control", "foreColor": "ControlText", "font": {"name": "Microsoft Sans Serif", "size": 8.25, "bold": false}, "rtl": false}, "ctls": [{"id": 7, "type": "label", "name": "Label1", "x": 20, "y": 20, "w": 39, "h": 13, "text": "Label1", "backColor": "Transparent", "foreColor": "ControlText", "font": null, "visible": true, "enabled": true, "rtl": false, "autoSize": true, "borderStyle": "None", "textAlign": "TopLeft"}, {"id": 8, "type": "label", "name": "Label2", "x": 20, "y": 50, "w": 39, "h": 13, "text": "Label2", "backColor": "Transparent", "foreColor": "ControlText", "font": null, "visible": true, "enabled": true, "rtl": false, "autoSize": true, "borderStyle": "None", "textAlign": "TopLeft"}, {"id": 9, "type": "button", "name": "Button1", "x": 20, "y": 85, "w": 90, "h": 28, "text": "Button1", "backColor": "Control", "foreColor": "ControlText", "font": null, "visible": true, "enabled": true, "rtl": false, "textAlign": "MiddleCenter"}, {"id": 10, "type": "picturebox", "name": "PictureBox1", "x": 140, "y": 20, "w": 160, "h": 90, "text": "", "backColor": "Transparent", "foreColor": "ControlText", "font": null, "visible": true, "enabled": true, "rtl": false, "image": "", "sizeMode": "Normal", "borderStyle": "FixedSingle"}, {"id": 11, "type": "picturebox", "name": "PictureBox2", "x": 140, "y": 125, "w": 160, "h": 80, "text": "", "backColor": "Transparent", "foreColor": "ControlText", "font": null, "visible": true, "enabled": true, "rtl": false, "image": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22180%22%20height%3D%2290%22%20viewBox%3D%220%200%2012%206%22%3E%3Crect%20width%3D%2212%22%20height%3D%222%22%20fill%3D%22%23007A3D%22%2F%3E%3Crect%20y%3D%222%22%20width%3D%2212%22%20height%3D%222%22%20fill%3D%22%23fff%22%2F%3E%3Crect%20y%3D%224%22%20width%3D%2212%22%20height%3D%222%22%20fill%3D%22%23CE1126%22%2F%3E%3Cpolygon%20points%3D%220%2C0%203%2C2%203%2C4%200%2C6%22%20fill%3D%22%23000%22%2F%3E%3C%2Fsvg%3E", "sizeMode": "Normal", "borderStyle": "FixedSingle"}], "code": "Public Class Form2\n\nEnd Class\n"}, {"name": "Form3", "kind": "form", "form": {"text": "Form3", "w": 320, "h": 230, "backColor": "Control", "foreColor": "ControlText", "font": {"name": "Microsoft Sans Serif", "size": 8.25, "bold": false}, "rtl": false}, "ctls": [{"id": 12, "type": "label", "name": "Label1", "x": 20, "y": 20, "w": 39, "h": 13, "text": "الوقت", "backColor": "Transparent", "foreColor": "ControlText", "font": null, "visible": true, "enabled": true, "rtl": false, "autoSize": true, "borderStyle": "None", "textAlign": "TopLeft"}, {"id": 13, "type": "label", "name": "Label2", "x": 20, "y": 50, "w": 39, "h": 13, "text": "التاريخ", "backColor": "Transparent", "foreColor": "ControlText", "font": null, "visible": true, "enabled": true, "rtl": false, "autoSize": true, "borderStyle": "None", "textAlign": "TopLeft"}, {"id": 14, "type": "label", "name": "Label3", "x": 20, "y": 80, "w": 39, "h": 13, "text": "المبرمجة", "backColor": "Transparent", "foreColor": "ControlText", "font": null, "visible": true, "enabled": true, "rtl": false, "autoSize": true, "borderStyle": "None", "textAlign": "TopLeft"}, {"id": 15, "type": "button", "name": "Button1", "x": 20, "y": 120, "w": 120, "h": 30, "text": "التالي", "backColor": "Control", "foreColor": "ControlText", "font": null, "visible": true, "enabled": true, "rtl": false, "textAlign": "MiddleCenter"}], "code": "Public Class Form3\n    ' 1) أعلني عن المتغير (block) على مستوى النموذج ونوعه (Integer)\n    --------------------\n\n    Private Sub Form3_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load\n        ' 2) أكملي التعليمة البرمجية باستخدام جملة Select Case: إذا كانت قيمة المتغير (views) تساوي (1) اكتبي رسالة (\"the first\")\n        Select Case ----------\n            Case ----------\n                MsgBox(\"the first\")\n        End Select\n\n        ' 3) أظهري قيمة الثابت (programmer) في الكائن (Label3)\n        --------------------\n\n        ' 4) أضيفي واحداً للمتغير (count)\n        --------------------\n\n        ' 5) اكتبي التعليمة البرمجية ليظهر الوقت الحالي على (Label1)\n        --------------------\n\n        ' 6) اكتبي التعليمة البرمجية ليظهر التاريخ الحالي على (Label2)\n        --------------------\n    End Sub\n\n    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click\n        ' 7) اكتبي التعليمات البرمجية لإخفاء النموذج الحالي\n        --------------------\n\n        ' 8) اكتبي التعليمات البرمجية لإظهار النموذج الرابع (Form4)\n        --------------------\n    End Sub\nEnd Class\n"}, {"name": "Form4", "kind": "form", "form": {"text": "Form4", "w": 320, "h": 250, "backColor": "Control", "foreColor": "ControlText", "font": {"name": "Microsoft Sans Serif", "size": 8.25, "bold": false}, "rtl": false}, "ctls": [], "code": "Public Class Form4\n\nEnd Class\n"}, {"name": "Module1", "kind": "module", "ctls": [], "code": "Module Module1\n    ' متغيرات وثوابت عامة يستخدمها المشروع (لا تحذفيها)\n    Public users As String\n    Public views As Integer = 1\n    Public count As Integer\n    Public Const programmer As String = \"طالبة الصف الثاني عشر\"\n\n    ' 1) أعلني عن متغير على مستوى المشروع اسمه (y) ونوعه (Integer)\n    --------------------\n\n    ' 2) أعلني عن متغير على مستوى المشروع اسمه (z) ونوعه (String)\n    --------------------\n\nEnd Module\n"}], "active": "Form1", "startup": "Form1", "nid": 16, "projId": "p2020", "task": ""}, "ver": 1794422064978}</script>
 <script>/* ===================== VB 2008 language engine: lexer, parser, checker, interpreter ===================== */
 const VB = (function () {
 'use strict';
@@ -516,6 +516,7 @@ function lex(src) {
       if (!br && /[%&$!#@]/.test(src[i] || '') && !(src[i] === '&' && /[Hh=]/.test(src[i + 1] || '')) && !/[A-Za-z0-9_"]/.test(src[i + 1] || '') && src[i + 1] !== ' ' ) { /* type char */ }
       const t = tk('w', w, st); t.k = w.toLowerCase(); if (br) t.esc = true; continue;
     }
+    if (c === '-' && src[i + 1] === '-' && src[i + 2] === '-') { const st = i; while (i < n && (src[i] === '-' || src[i] === '\u2014' || src[i] === '\u2013')) i++; const t = tk('w', src.slice(st, i), st); t.k = t.v; t.blank = true; continue; }
     const two = src.substr(i, 2);
     if (['<>', '<=', '>=', '+=', '-=', '*=', '/=', '\\=', '&=', '^=', '=<', '=>'].includes(two)) {
       const st = i; i += 2; let v = two; if (v === '=<') v = '<='; if (v === '=>') v = '>='; tk('op', v, st); continue;
@@ -1017,6 +1018,7 @@ function parse(toks, errs) {
     return { kind, name: nt.v, key: nt.k, params, retType, handles, body: b.stmts, mods, line: kt.line, col: nt.col, len: nt.len, kwLine: kt.line, endLine };
   }
   function parseMember(prog) {
+    if (peek().blank) { const bt = next(); errs.push(E('BC30451', 'Incomplete code: write your answer here.', '✏ اكتبي الحل مكان الشرطات ------', bt)); syncLine(); return; }
     const mods = [];
     while (peek().t === 'w' && MODS.concat(['dim', 'static']).includes(peek().k)) mods.push(next().k);
     if (atW('sub') || atW('function')) { prog.procs.push(parseProc(peek().k, mods)); return; }
@@ -1567,7 +1569,7 @@ function check(prog, controls, errs, G, file) {
     function undeclared(n) {
       const key = n.key;
       let ar = `الاسم «${n.name}» غير معرّف`;
-      if (/^_+$/.test(n.name)) { errs.push(E('BC30451', `'${n.name}' is not declared.`, '✏ أكملي الفراغ ____ بالتعليمة المناسبة', n)); return; }
+      if (/^_+$/.test(n.name) || /^-{3,}$/.test(n.name)) { errs.push(E('BC30451', 'Incomplete code: write your answer here.', '✏ اكتبي الحل مكان الشرطات ------', n)); return; }
       if (HINTS[key]) ar += ' — ' + HINTS[key];
       else {
         const cands = []; scopes.forEach(sc => sc.forEach((v, k) => cands.push(v.decl ? v.decl.name : k))); fields.forEach((v, k) => cands.push(v.decl.name)); ctrlNames.forEach(c => cands.push(c)); procs.forEach(pp => cands.push(pp.name));
@@ -2513,7 +2515,12 @@ function styleCtl(el, c, formFont, run) {
   st.fontFamily = f.fam; st.fontSize = f.px; st.fontWeight = f.bold ? '700' : '400'; st.fontStyle = c.font && c.font.italic ? 'italic' : ''; st.textDecoration = [c.font && c.font.underline && 'underline', c.font && c.font.strikeout && 'line-through'].filter(Boolean).join(' ');
   if (c.type === 'button') { st.background = (c.backColor && c.backColor.toLowerCase() !== 'control') ? colorCss(c.backColor) : ''; }
   else st.background = colorCss(c.backColor) || '';
-  if (c.type === 'picturebox' && c.image) { st.backgroundImage = `url(${c.image})`; const sm = c.sizeMode; st.backgroundSize = sm === 'StretchImage' ? '100% 100%' : sm === 'Zoom' ? 'contain' : 'auto'; st.backgroundPosition = sm === 'CenterImage' || sm === 'Zoom' ? 'center' : '0 0'; }
+  if (c.type === 'picturebox' && c.image) {
+    st.backgroundImage = `url(${c.image})`; const sm = c.sizeMode || 'Normal';
+    st.backgroundSize = sm === 'StretchImage' ? '100% 100%' : sm === 'Zoom' ? 'contain' : 'auto';
+    st.backgroundPosition = sm === 'CenterImage' || sm === 'Zoom' ? 'center' : '0 0';
+    if (sm === 'AutoSize') { if (c.imgW) { st.width = c.imgW + 'px'; st.height = c.imgH + 'px'; } else imgDims(c, () => styleCtl(el, c, formFont, run)); }
+  }
   else if (c.type === 'picturebox') st.backgroundImage = '';
   st.color = colorCss(c.foreColor);
   if (c.enabled === false) st.color = '#8d8d8d';
@@ -2610,7 +2617,7 @@ function placeHandles(cl, el, c) {
   if (!el) return;
   cl.querySelectorAll('.h').forEach(h => h.remove());
   const x = el.offsetLeft, y = el.offsetTop, w = el.offsetWidth, h = el.offsetHeight;
-  const hs = (c.type === 'label' && c.autoSize) ? [] : (c.type === 'textbox' && !c.multiline) || c.type === 'combobox' ? ['e'] : ['e', 's', 'se'];
+  const hs = (c.type === 'label' && c.autoSize) || (c.type === 'picturebox' && c.sizeMode === 'AutoSize' && c.image) ? [] : (c.type === 'textbox' && !c.multiline) || c.type === 'combobox' ? ['e'] : ['e', 's', 'se'];
   const half = matchMedia('(pointer:coarse)').matches ? 8 : 4;
   hs.forEach(k => {
     const d = document.createElement('div'); d.className = 'h ' + k;
@@ -2693,13 +2700,20 @@ const PD = {
   sorted: ['Sorted', 'bool', 'Controls whether items in the list are sorted.', 'ترتيب العناصر أبجدياً'],
   dropDownStyle: ['DropDownStyle', 'enum:DropDown,DropDownList', 'Controls the appearance and functionality of the combo box.', 'DropDownList: اختيار فقط بدون كتابة'],
   image: ['Image', 'image', 'The image displayed in the PictureBox.', 'الصورة المعروضة — اختاري صورة من جهازك'],
-  sizeMode: ['SizeMode', 'enum:Normal,StretchImage,Zoom,CenterImage', 'Controls how the image is positioned.', 'طريقة عرض الصورة: StretchImage تمدّها لتملأ الأداة'],
+  sizeMode: ['SizeMode', 'enum:Normal,StretchImage,AutoSize,CenterImage,Zoom', 'Controls how the PictureBox will handle image placement and control sizing.', 'Normal: الصورة بحجمها الأصلي من الزاوية العليا اليسرى (يُقص الزائد) • StretchImage: تمتد لتملأ الأداة • AutoSize: تتغير الأداة لحجم الصورة • CenterImage: الصورة بحجمها في المنتصف • Zoom: تكبر/تصغر مع الحفاظ على تناسبها'],
   value: ['Value', 'num', 'The current value of the progress bar.', 'القيمة الحالية لشريط التقدم'],
   minimum: ['Minimum', 'num', 'The lower bound of the range.', 'أقل قيمة'], maximum: ['Maximum', 'num', 'The upper bound of the range.', 'أكبر قيمة'], step: ['Step', 'num', 'Amount to increment with PerformStep.', 'مقدار الزيادة عند PerformStep'],
   interval: ['Interval', 'num', 'Frequency of the Tick event, in milliseconds.', 'الزمن بين كل حدث Tick بالملّي ثانية (1000 = ثانية واحدة)'],
   tEnabled: ['Enabled', 'bool', 'Enables generation of Tick events.', 'تشغيل المؤقت من بداية البرنامج']
 };
 function propList(o) {
+  const SUBS = ['fontBold', 'fontItalic', 'fontName', 'fontSize', 'fontUnderline'];
+  const base = propList0(o).filter(k => !SUBS.includes(k));
+  base.sort((x, y) => { const a = PD[x][0], b = PD[y][0]; if (a === '(Name)') return -1; if (b === '(Name)') return 1; return a.toLowerCase() < b.toLowerCase() ? -1 : a.toLowerCase() > b.toLowerCase() ? 1 : 0; });
+  const i = base.indexOf('font'); if (fontOpen && i >= 0) base.splice(i + 1, 0, ...SUBS);
+  return base;
+}
+function propList0(o) {
   const FK = () => fontOpen ? ['font', 'fontName', 'fontSize', 'fontBold', 'fontItalic', 'fontUnderline'] : ['font'];
   if (o === F.form) return ['text', 'backColor', 'foreColor', ...FK(), 'size', 'rtl'];
   const t = o.type;
@@ -2723,7 +2737,8 @@ function setP(o, k, v) {
     case 'fontName': nf().name = v; break; case 'fontSize': { const n = parseFloat(v); if (n > 0 && n < 200) nf().size = n; break; } case 'fontBold': nf().bold = v; break;
     case 'location': { const m = /(-?\d+)\D+(-?\d+)/.exec(v); if (m) { o.x = +m[1]; o.y = +m[2]; } break; }
     case 'size': { const m = /(\d+)\D+(\d+)/.exec(v); if (m) { o.w = Math.max(8, +m[1]); o.h = Math.max(8, +m[2]); } break; }
-    case 'tbAlign': o.textAlign = v; break; case 'tEnabled': o.enabled = v; break;
+    case 'tbAlign': o.textAlign = v; break;
+    case 'sizeMode': o.sizeMode = v; if (v === 'AutoSize' && o.image) { if (o.imgW) { o.w = o.imgW; o.h = o.imgH; } else imgDims(o, () => { changed(false); renderProps(); }); } break; case 'tEnabled': o.enabled = v; break;
     case 'name': return renameCtl(o, v);
     case 'text': o.text = v; if (o.type === 'label' && o.autoSize) { } break;
     case 'checked': o.checked = v; if (v && o.type === 'radiobutton') F.ctls.forEach(c => { if (c !== o && c.type === 'radiobutton' && sameGroup(c, o)) c.checked = false; }); break;
@@ -2866,15 +2881,16 @@ function colorPicker(o, k, anchor) {
 }
 function descFor(d) { if (!d) return; $('#propDesc').innerHTML = `<b>${esc(d[0])}</b>${esc(d[2])}<div class="ar">${esc(d[3])}</div>`; }
 let imgTarget = null;
+function imgDims(c, cb) { if (!c.image) return; const im = new Image(); im.onload = () => { c.imgW = im.naturalWidth || im.width; c.imgH = im.naturalHeight || im.height; if (c.sizeMode === 'AutoSize') { c.w = c.imgW; c.h = c.imgH; } cb && cb(); }; im.src = c.image; }
 async function pickImage(o) {
   const box = html(`<div class="rtl" style="margin-bottom:8px">اختاري صورة:</div><div class="imglib">${IMG_LIB.map((x, i) => `<button data-i="${i}"><img src="${x[1]}"><span>${x[0]}</span></button>`).join('')}<button data-i="dev"><span style="font-size:26px">📂</span><span>من جهازي…</span></button></div>`);
   let pick = null; box.querySelectorAll('button').forEach(b => b.onclick = () => { pick = b.dataset.i; box.closest('.dlgLayer').querySelector('.x').click(); });
   await dialog({ title: 'Select Resource — اختيار صورة', body: box, buttons: [['إلغاء', 0]] });
   if (pick === null) return;
   if (pick === 'dev') { imgTarget = o; $('#imgIn').click(); return; }
-  o.image = IMG_LIB[+pick][1]; changed(false); renderProps();
+  o.image = IMG_LIB[+pick][1]; o.imgW = 0; imgDims(o, () => { changed(false); renderProps(); });
 }
-$('#imgIn').onchange = e => { const f = e.target.files[0]; if (!f || !imgTarget) return; const r = new FileReader(); r.onload = () => { const img = new Image(); img.onload = () => { const cv = document.createElement('canvas'); const s = Math.min(1, 480 / Math.max(img.width, img.height)); cv.width = img.width * s; cv.height = img.height * s; cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height); imgTarget.image = cv.toDataURL('image/jpeg', .82); if (imgTarget.sizeMode === 'Normal') imgTarget.sizeMode = 'StretchImage'; changed(false); renderProps(); }; img.src = r.result; }; r.readAsDataURL(f); e.target.value = ''; };
+$('#imgIn').onchange = e => { const f = e.target.files[0]; if (!f || !imgTarget) return; const r = new FileReader(); r.onload = () => { const img = new Image(); img.onload = () => { const cv = document.createElement('canvas'); const s = Math.min(1, 480 / Math.max(img.width, img.height)); cv.width = img.width * s; cv.height = img.height * s; cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height); imgTarget.image = cv.toDataURL('image/jpeg', .82); imgTarget.imgW = cv.width; imgTarget.imgH = cv.height; changed(false); renderProps(); }; img.src = r.result; }; r.readAsDataURL(f); e.target.value = ''; };
 async function editItems(o) {
   const ta = document.createElement('textarea'); ta.className = 'big'; ta.dir = 'auto'; ta.value = (o.items || []).map(VB.toStr).join('\n');
   const wrap = html('<div class="rtl" style="margin-bottom:6px">اكتبي كل عنصر في سطر منفصل:<br><span style="font-size:11px;color:#555" dir="ltr">Enter the strings in the collection (one per line):</span></div>'); wrap.appendChild(ta);
@@ -3797,35 +3813,37 @@ function loadProject(p) { stopRun(true); curLine = 0; P = migrate(JSON.parse(JSO
 /* ================= examples ================= */
 const SUB = (n, ev, o, body) => `    Private Sub ${n}_${ev}(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ${o}.${ev}\n${body}\n    End Sub\n`;
 function EX(t, d, form, ctls, code) { return { t, d, form, ctls, code }; }
-const KW_FLAG = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6"><rect width="12" height="2" fill="#007A3D"/><rect y="2" width="12" height="2" fill="#fff"/><rect y="4" width="12" height="2" fill="#CE1126"/><polygon points="0,0 3,2 3,4 0,6" fill="#000"/></svg>');
+const KW_FLAG = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="180" height="90" viewBox="0 0 12 6"><rect width="12" height="2" fill="#007A3D"/><rect y="2" width="12" height="2" fill="#fff"/><rect y="4" width="12" height="2" fill="#CE1126"/><polygon points="0,0 3,2 3,4 0,6" fill="#000"/></svg>');
 const IMG_LIB = [['علم الكويت', KW_FLAG],
-  ['حاسوب', 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 48"><rect x="6" y="4" width="52" height="32" rx="3" fill="#2d3e50"/><rect x="10" y="8" width="44" height="24" fill="#5dade2"/><rect x="2" y="38" width="60" height="6" rx="2" fill="#95a5a6"/></svg>')],
-  ['نجمة', 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#f5b301" d="M12 2l3 6.5 7 .8-5.2 4.7 1.5 7L12 17.4 5.7 21l1.5-7L2 9.3l7-.8z"/></svg>')],
-  ['وجه مبتسم', 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#ffd93b"/><circle cx="8" cy="9" r="1.6"/><circle cx="16" cy="9" r="1.6"/><path d="M6.5 14a6 6 0 0 0 11 0" stroke="#000" stroke-width="1.6" fill="none"/></svg>')]];
+  ['حاسوب', 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="128" height="96" viewBox="0 0 64 48"><rect x="6" y="4" width="52" height="32" rx="3" fill="#2d3e50"/><rect x="10" y="8" width="44" height="24" fill="#5dade2"/><rect x="2" y="38" width="60" height="6" rx="2" fill="#95a5a6"/></svg>')],
+  ['نجمة', 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24"><path fill="#f5b301" d="M12 2l3 6.5 7 .8-5.2 4.7 1.5 7L12 17.4 5.7 21l1.5-7L2 9.3l7-.8z"/></svg>')],
+  ['وجه مبتسم', 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#ffd93b"/><circle cx="8" cy="9" r="1.6"/><circle cx="16" cy="9" r="1.6"/><path d="M6.5 14a6 6 0 0 0 11 0" stroke="#000" stroke-width="1.6" fill="none"/></svg>')]];
 const PROJECT_2020 = () => {
   const p = newProject(); const saveP = P; P = p;
+  const D = '--------------------';
   const S = (n, ev, o, body, args) => `    Private Sub ${n}_${ev}(ByVal sender As System.Object, ByVal e As ${args || 'System.EventArgs'}) Handles ${o}.${ev}\n${body}\n    End Sub\n`;
   const f1 = buildFile('Form1', 'form', { text: 'تسجيل الدخول', w: 320, h: 230 },
     [['label', 'Label1', 20, 26, 0, 0, { text: 'اسم المستخدم:' }], ['textbox', 'TextBox1', 120, 22, 170, 20], ['label', 'Label2', 20, 62, 0, 0, { text: 'كلمة السر:' }], ['textbox', 'TextBox2', 120, 58, 170, 20, { passwordChar: '*' }], ['button', 'Button1', 120, 100, 80, 30, { text: 'دخول' }], ['button', 'Button2', 210, 100, 80, 30, { text: 'خروج' }]],
-    `Public Class Form1\n    ' ===== السؤال 5 — النموذج الأول (Form1) =====\n    ' 1. أعلني عن ثابت على مستوى النموذج الأول حيث أن اسم الثابت (x) ونوعه String وقيمته (wafra)\n\n\n` +
-    S('Button1', 'Click', 'Button1', `        ' 2. عند الضغط على زر دخول:\n        ' أ) اكتبي التعليمة البرمجية لتخصيص اسم المستخدم المكتوب في (TextBox1) للمتغير users\n\n\n        ' ب) أكملي تعليمة If..Then للتأكد من صحة كلمة السر من خلال التحقق من TextBox2 أنها تساوي (12)\n        If ______________ Then\n            MsgBox("مرحباً " & users)\n            Me.Hide()\n            Form3.Show()\n        Else\n            MsgBox("كلمة السر غير صحيحة")\n        End If`) + '\n' +
-    S('Button2', 'Click', 'Button2', `        ' 3. عند الضغط على زر الخروج اكتبي التعليمة البرمجية لإنهاء البرنامج\n\n`) + 'End Class\n');
+    `Public Class Form1\n    ' 1) أعلني عن ثابت على مستوى النموذج الأول حيث أن اسم الثابت (x) ونوعه String وقيمته (wafra)\n    ${D}\n\n` +
+    S('Button1', 'Click', 'Button1', `        ' 2) اكتبي التعليمة البرمجية لتخصيص اسم المستخدم المكتوب في (TextBox1) للمتغير users\n        ${D}\n\n        ' 3) أكملي تعليمة If..Then للتأكد من صحة كلمة السر من خلال التحقق من TextBox2 أنها تساوي (12) ثم إظهار رسالة للمستخدم ("welcome")\n        If -------------- Then --------------`) + '\n' +
+    S('Button2', 'Click', 'Button2', `        ' 4) اكتبي التعليمة البرمجية لإنهاء البرنامج\n        ${D}`) + 'End Class\n');
   const f2 = buildFile('Form2', 'form', { text: 'Form2', w: 330, h: 260 },
     [['label', 'Label1', 20, 20, 0, 0], ['label', 'Label2', 20, 50, 0, 0], ['button', 'Button1', 20, 85, 90, 28], ['picturebox', 'PictureBox1', 140, 20, 160, 90, { borderStyle: 'FixedSingle' }], ['picturebox', 'PictureBox2', 140, 125, 160, 80, { borderStyle: 'FixedSingle', image: KW_FLAG }]],
-    `Public Class Form2\n    ' ===== السؤال 4 — النموذج الثاني (Form2) =====\n    ' هذا السؤال لا يحتاج كوداً: اضبطي الخصائص من نافذة Properties حسب الجدول:\n    '   الكائن          الخاصية        القيمة\n    '   Form2           BackColor      Yellow\n    '   Label1          Text           مرحبا\n    '   Label2          Font           حجم الخط 10 ونمط Bold\n    '   Button1         ForeColor      Red (أحمر)\n    '   PictureBox1     Image          علم الكويت\n    '   PictureBox2     SizeMode       StretchImage\n\nEnd Class\n`);
+    `Public Class Form2\n\nEnd Class\n`);
   const f3 = buildFile('Form3', 'form', { text: 'Form3', w: 320, h: 230 },
     [['label', 'Label1', 20, 20, 0, 0, { text: 'الوقت' }], ['label', 'Label2', 20, 50, 0, 0, { text: 'التاريخ' }], ['label', 'Label3', 20, 80, 0, 0, { text: 'المبرمجة' }], ['button', 'Button1', 20, 120, 120, 30, { text: 'التالي' }]],
-    `Public Class Form3\n    ' ===== السؤال 6 — النموذج الثالث (Form3) =====\n    ' 1. أعلني عن المتغير (block) على مستوى النموذج ونوعه (Integer)\n\n\n` +
-    S('Form3', 'Load', 'MyBase', `        ' 2. عند تحميل النموذج:\n        ' أ) أكملي التعليمة البرمجية باستخدام جملة Select Case: إذا كانت قيمة المتغير (views) تساوي (1) اكتبي رسالة ("انت الأول")\n        Select Case ______\n            Case ___\n                MsgBox(__________)\n        End Select\n\n        ' ب) أظهري قيمة الثابت (programmer) في الكائن (Label3)\n\n\n        ' ج) أضيفي واحداً للمتغير (count)\n\n\n        ' د) اكتبي التعليمة البرمجية ليظهر الوقت الحالي على (Label1)\n\n\n        ' هـ) اكتبي التعليمة البرمجية ليظهر التاريخ الحالي على (Label2)\n\n`) + '\n' +
-    S('Button1', 'Click', 'Button1', `        ' 3. عند الضغط على زر التالي:\n        ' أ) اكتبي التعليمات البرمجية لإخفاء النموذج الحالي\n\n\n        ' ب) اكتبي التعليمات البرمجية لإظهار النموذج الرابع (Form4)\n\n`) + 'End Class\n');
-  const f4 = buildFile('Form4', 'form', { text: 'Form4', w: 320, h: 250 }, [],
-    `Public Class Form4\n    ' ===== السؤال 3 — النموذج الرابع (Form4) =====\n    ' أضيفي إلى هذا النموذج الكائنات التالية من صندوق الأدوات (Toolbox):\n    '   Label2  ،  Button1  ،  PictureBox2  ،  TextBox3\n    ' (يمكنكِ تغيير اسم الكائن من الخاصية Name في نافذة Properties)\n\nEnd Class\n`);
+    `Public Class Form3\n    ' 1) أعلني عن المتغير (block) على مستوى النموذج ونوعه (Integer)\n    ${D}\n\n` +
+    S('Form3', 'Load', 'MyBase', `        ' 2) أكملي التعليمة البرمجية باستخدام جملة Select Case: إذا كانت قيمة المتغير (views) تساوي (1) اكتبي رسالة ("the first")\n        Select Case ----------\n            Case ----------\n                MsgBox("the first")\n        End Select\n\n        ' 3) أظهري قيمة الثابت (programmer) في الكائن (Label3)\n        ${D}\n\n        ' 4) أضيفي واحداً للمتغير (count)\n        ${D}\n\n        ' 5) اكتبي التعليمة البرمجية ليظهر الوقت الحالي على (Label1)\n        ${D}\n\n        ' 6) اكتبي التعليمة البرمجية ليظهر التاريخ الحالي على (Label2)\n        ${D}`) + '\n' +
+    S('Button1', 'Click', 'Button1', `        ' 7) اكتبي التعليمات البرمجية لإخفاء النموذج الحالي\n        ${D}\n\n        ' 8) اكتبي التعليمات البرمجية لإظهار النموذج الرابع (Form4)\n        ${D}`) + 'End Class\n');
+  const f4 = buildFile('Form4', 'form', { text: 'Form4', w: 320, h: 250 }, [], `Public Class Form4\n\nEnd Class\n`);
   const m1 = buildFile('Module1', 'module', null, null,
-    `Module Module1\n    ' متغيرات وثوابت عامة يستخدمها المشروع (لا تحذفيها)\n    Public users As String\n    Public views As Integer = 1\n    Public count As Integer\n    Public Const programmer As String = "طالبة الصف الثاني عشر"\n\n    ' ===== السؤال 7 =====\n    ' أعلني عن متغير على مستوى المشروع اسمه (total) ونوعه (Integer)\n\n\nEnd Module\n`);
+    `Module Module1\n    ' متغيرات وثوابت عامة يستخدمها المشروع (لا تحذفيها)\n    Public users As String\n    Public views As Integer = 1\n    Public count As Integer\n    Public Const programmer As String = "طالبة الصف الثاني عشر"\n\n    ' 1) أعلني عن متغير على مستوى المشروع اسمه (y) ونوعه (Integer)\n    ${D}\n\n    ' 2) أعلني عن متغير على مستوى المشروع اسمه (z) ونوعه (String)\n    ${D}\n\nEnd Module\n`);
   p.files = [f1, f2, f3, f4, m1]; p.startup = 'Form1'; p.active = 'Form1'; p.projId = 'p2020';
   p.task = '';
   P = saveP; return p;
 };
+window.__mkProj = () => PROJECT_2020();
+window.__mkProj = () => PROJECT_2020();
 const EXAMPLES = [
   { t: '📝 مشروع الطالبات (2020) — Forms و Module', d: 'Form1 إلى Form4 و Module1 — الأسئلة مكتوبة داخل الأحداث', proj: PROJECT_2020 },
   EX('١. مرحباً بكِ — MsgBox', 'زر يعرض رسالة وأخرى تغيّر لون النموذج', { text: 'أول برنامج', w: 300, h: 200 },
@@ -4025,7 +4043,7 @@ async function initCloud() {
 /* ================= init ================= */
 applyDesk();
 P = load() || newProject();
-if (P.projId !== 'p2020' && P.projId !== 'pub') P = (EMB ? embProject() : PROJECT_2020());
+if (EMB ? P.projId !== 'pub' : (P.projId !== 'p2020' && P.projId !== 'pub')) P = (EMB ? embProject() : PROJECT_2020());
 setActive(P.active || P.startup || 'Form1');
 try { const fs = +localStorage.getItem('vbsimFs'); if (fs) codeFs = fs; } catch (e) { }
 document.documentElement.style.setProperty('--code-fs', codeFs + 'px');
